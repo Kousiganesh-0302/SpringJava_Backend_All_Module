@@ -187,6 +187,7 @@ public class EmployeeController {
                 employeeDetails.put("emp_id", employee.getEmpId());
                 employeeDetails.put("emp_name", employee.getEmpName());
                 employeeDetails.put("position", employee.getPosition());
+                employeeDetails.put("phone", employee.getPhone());
                 response.put("employee", employeeDetails);
                 log.info("API: Login successful for Employee ID: {}", empId);
                 return new ResponseEntity<>(response, HttpStatus.OK);
