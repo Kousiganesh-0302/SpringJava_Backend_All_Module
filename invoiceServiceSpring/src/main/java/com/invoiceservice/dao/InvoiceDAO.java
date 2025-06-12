@@ -6,6 +6,8 @@ import com.invoiceservice.repo.InvoiceRepository;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +58,10 @@ public class InvoiceDAO implements InvoiceDAOInterface {
         invoiceRepository.deleteByInvoiceNumber(invoiceNumber);
         log.debug("DAO: Successfully deleted invoice by number: {}", invoiceNumber);
 
+    }
+
+    @Override
+    public List<Invoice> findAll() {
+        return invoiceRepository.findAll();
     }
 }

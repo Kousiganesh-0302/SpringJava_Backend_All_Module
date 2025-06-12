@@ -6,6 +6,8 @@ import com.invoiceservice.service.InvoiceServiceInterface;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:3000")
 @RequestMapping("/api/invoice")
 @Tag(name = "Invoice", description = "Operations on invoice")
 public class InvoiceController {
@@ -30,7 +33,12 @@ public class InvoiceController {
         log.info("API: Invoice created successfully with ID: {}", invoice.getInvoiceId());
         return ResponseEntity.status(HttpStatus.CREATED).body(invoice);
     }
-
+    @GetMapping
+    public ResponseEntity<List<Invoice>> getAllInvoices() {
+        log.info("API: Fetching all invoices for recent transactions.");
+        List<Invoice> invoices = invoiceService.getAllInvoices();
+        return ResponseEntity.ok(invoices);
+    }
     @GetMapping("/{invoiceId}")
     public ResponseEntity<Invoice> getInvoiceById(@PathVariable String invoiceId) {
         log.info("API: Fetching invoice with ID: {}", invoiceId);

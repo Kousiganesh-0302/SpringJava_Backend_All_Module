@@ -21,6 +21,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -134,6 +135,12 @@ public class InvoiceService implements InvoiceServiceInterface {
         return invoiceDAO.save(invoice);
     }
     
+    @Override
+    @Transactional(readOnly = true)
+    public List<Invoice> getAllInvoices() {
+        log.info("Service: Fetching all invoices directly from DB (no specific order).");
+        return invoiceDAO.findAll(); // Simple call to DAO's findAll()
+    }
     
     @Override
     @Transactional(readOnly = true)
